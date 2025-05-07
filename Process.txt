@@ -7,55 +7,55 @@ Private Subnet: Hosts Database Server (EC2)
 
 IAM Roles:
 
-One for EC2 to access S3 (for backup)
-
-One for users/admins with defined policies
+          One for EC2 to access S3 (for backup)
+          
+          One for users/admins with defined policies
 
 EC2 Instances:
 
-One for hosting the web application (Apache/Node/Django etc.)
-
-One for hosting a secure database (MySQL/PostgreSQL)
+              One for hosting the web application (Apache/Node/Django etc.)
+              
+              One for hosting a secure database (MySQL/PostgreSQL)
 
 S3 Bucket:
 
-For storing regular database backups securely
+          For storing regular database backups securely
 
 Backup Plan:
 
-Script or AWS Backup plan to take snapshots of EC2/database and push to S3
+            Script or AWS Backup plan to take snapshots of EC2/database and push to S3
 
 🔧 Steps to Build:
 Create VPC:
 
-Custom VPC with 2 subnets: one public (App), one private (DB)
-
-Setup route tables, internet gateway (for public), NAT gateway (for private)
+            Custom VPC with 2 subnets: one public (App), one private (DB)
+            
+            Setup route tables, internet gateway (for public), NAT gateway (for private)
 
 Launch EC2 Instances:
 
-App EC2 (in Public Subnet) – Install web server & app code
-
-DB EC2 (in Private Subnet) – Install MySQL/Postgres
+                      App EC2 (in Public Subnet) – Install web server & app code
+                      
+                      DB EC2 (in Private Subnet) – Install MySQL/Postgres
 
 Configure IAM:
 
-Create roles for EC2 to access S3
-
-Create user roles (read-only, admin etc.)
+              Create roles for EC2 to access S3
+              
+              Create user roles (read-only, admin etc.)
 
 Setup S3 Backup:
 
-Create S3 bucket
+                Create S3 bucket
 
-Write cron job or Lambda function to backup DB regularly
+                Write cron job or Lambda function to backup DB regularly
 
-Store snapshots or exports in S3
+                Store snapshots or exports in S3
 
 Security:
 
-Use Security Groups and NACLs to restrict access
-
-Only App EC2 can access DB EC2
-
-Public access only for App EC2 (port 80/443)
+          Use Security Groups and NACLs to restrict access
+          
+          Only App EC2 can access DB EC2
+          
+          Public access only for App EC2 (port 80/443)
